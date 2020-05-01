@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/allCountriesFragment"
+        android:icon="@drawable/ic_home"
+        android:title=""
+        />
+    <item
+        android:id="@+id/subscribedCountriesFragment"
+        android:icon="@drawable/ic_star"
+        android:iconTint="#928D8D"
+
+        android:title=""
+       />
+
+
+
+</menu>
