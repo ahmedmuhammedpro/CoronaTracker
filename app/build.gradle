@@ -53,6 +53,10 @@ dependencies {
     implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
     //swiperefreshlayout
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+//circle image
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    //picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
     /*sara*/
     /*ahmed*/
