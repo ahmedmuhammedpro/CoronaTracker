@@ -1,5 +1,6 @@
 package com.example.mvvmdemo.data_layer.remote
 
+import com.example.coronatracker.data_layer.model.World
 import com.example.mvvmdemo.data_layer.model.Country
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
@@ -38,6 +39,14 @@ class RetrofitClient private constructor(){
          }
          return list!!
          }
+    suspend fun getWorldData(): World {
+        var data : World? = null
+        val result = counrtyApi?.getWorldData()?.await()
+        if (result != null)
+        {   data = result
+        }
+        return data!!
+    }
     /*sara*/
     /*ahmed*/
     /*ahmed*/
