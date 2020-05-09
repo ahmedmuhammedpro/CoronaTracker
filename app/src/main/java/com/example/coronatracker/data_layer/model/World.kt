@@ -1,6 +1,5 @@
 package com.example.coronatracker.data_layer.model
 
-import com.example.mvvmdemo.data_layer.model.CountryInfo
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 

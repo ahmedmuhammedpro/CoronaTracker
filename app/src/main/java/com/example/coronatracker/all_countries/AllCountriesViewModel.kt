@@ -1,10 +1,11 @@
 package com.example.coronatracker.all_countries
 
 import androidx.lifecycle.ViewModel
+import com.example.coronatracker.data_layer.RepositoryInterface
+import com.example.coronatracker.data_layer.Repositry
+import com.example.coronatracker.data_layer.model.Country
 import com.example.coronatracker.data_layer.model.World
-import com.example.mvvmdemo.data_layer.RepositoryInterface
-import com.example.mvvmdemo.data_layer.Repositry
-import com.example.mvvmdemo.data_layer.model.Country
+
 
 class AllCountriesViewModel : ViewModel() {
     var  allCountryList :List<Country>? = null

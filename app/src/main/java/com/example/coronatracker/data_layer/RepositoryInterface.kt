@@ -1,7 +1,7 @@
-package com.example.mvvmdemo.data_layer
+package com.example.coronatracker.data_layer
 
+import com.example.coronatracker.data_layer.model.Country
 import com.example.coronatracker.data_layer.model.World
-import com.example.mvvmdemo.data_layer.model.Country
 
 interface RepositoryInterface {
       /*sara*/

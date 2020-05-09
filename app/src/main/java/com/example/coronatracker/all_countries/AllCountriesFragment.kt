@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -14,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.coronatracker.R
 import com.example.coronatracker.all_countries.adapter.CountryAdapter
+import com.example.coronatracker.data_layer.model.Country
 import com.example.coronatracker.data_layer.model.World
-import com.example.mvvmdemo.data_layer.model.Country
 import kotlinx.android.synthetic.main.all_countries_fragment.view.*
 import kotlinx.coroutines.*
 
@@ -31,6 +32,7 @@ class AllCountriesFragment : Fragment() {
     var active :TextView? = null
     var ciritcal :TextView? = null
     var world :World? = null
+    var progressBar :ProgressBar?= null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,12 +43,14 @@ class AllCountriesFragment : Fragment() {
         today = view.allWorldToday
         active = view.allWorldActive
         ciritcal = view.allWorldCritical
+        progressBar = view.progressBar
         swipeRefreshLayout = view.swipeContainer
         swipeRefreshLayout!!.setOnRefreshListener {
         setUI()
             swipeRefreshLayout!!.isRefreshing = false
             Toast.makeText(context, "Refresh", Toast.LENGTH_SHORT).show();
         }
+
         return view
     }
 
@@ -54,6 +58,8 @@ class AllCountriesFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(AllCountriesViewModel::class.java)
        setUI()
+
+
     }
 fun setUI()
 {
@@ -63,6 +69,7 @@ fun setUI()
         withContext(Dispatchers.Main) {
             countryAdapter = CountryAdapter(list!!)
             Log.i("ee"," "+ list!!.size)
+
             val mLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context)
             recyclerView!!.setLayoutManager(mLayoutManager)
             recyclerView!!.setAdapter(countryAdapter)
@@ -70,6 +77,9 @@ fun setUI()
             today?.text = world!!.todayCases.toString()
             active?.text = world!!.active.toString()
             ciritcal?.text = world!!.critical.toString()
+            progressBar?.visibility = View.INVISIBLE
+
+
         }
     }
 }

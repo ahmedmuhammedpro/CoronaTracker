@@ -1,14 +1,16 @@
 package com.example.coronatracker.all_countries.adapter
 
-import android.util.Log
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.example.coronatracker.Constant
 import com.example.coronatracker.R
-import com.example.mvvmdemo.data_layer.model.Country
+import com.example.coronatracker.data_layer.model.Country
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.country_card.view.*
 
@@ -43,6 +45,19 @@ class CountryAdapter(inputList :List<Country>) : RecyclerView.Adapter<CountryAda
             .load(currentCountry.countryInfo.flag)
             .placeholder(R.drawable.ic_account)
             .into(holder.countryImage);
+        holder.itemView.setOnClickListener {
+            val bundle = Bundle()
+           // val personJsonString: String = GsonUtils.getGsonParser()!!.toJson(currentCountry)
+            bundle.putString(Constant.COUNTRY_NAME, currentCountry.country)
+            bundle.putLong(Constant.CASES, currentCountry.cases)
+            bundle.putLong(Constant.TODAY_CASES, currentCountry.todayCases)
+            bundle.putLong(Constant.DEATHS, currentCountry.deaths)
+            bundle.putLong(Constant.TODAT_DEATH, currentCountry.todayDeaths)
+            bundle.putLong(Constant.ACTIVE, currentCountry.active)
+            bundle.putLong(Constant.RECIVERD, currentCountry.recovered)
+            Navigation.findNavController(it)
+                .navigate(R.id.action_allCountriesFragment_to_countryStatisticFragment, bundle)
+        }
     }
     class CountryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var countryImage :ImageView? = null

@@ -1,7 +1,7 @@
-package com.example.mvvmdemo.data_layer.remote
+package com.example.coronatracker.data_layer.remote
 
+import com.example.coronatracker.data_layer.model.Country
 import com.example.coronatracker.data_layer.model.World
-import com.example.mvvmdemo.data_layer.model.Country
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
