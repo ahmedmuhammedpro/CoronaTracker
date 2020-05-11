@@ -68,7 +68,6 @@ fun setUI()
         world = viewModel.getWorldData()
         withContext(Dispatchers.Main) {
             countryAdapter = CountryAdapter(list!!)
-            Log.i("ee"," "+ list!!.size)
 
             val mLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context)
             recyclerView!!.setLayoutManager(mLayoutManager)
