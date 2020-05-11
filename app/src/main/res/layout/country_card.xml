@@ -127,6 +127,20 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/recoveredTextView"
                 app:layout_constraintTop_toBottomOf="@+id/recoveredTextView" />
+
+            <ImageButton
+                android:id="@+id/subscribeOnBtn"
+                style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="15dp"
+                android:src="@drawable/ic_star"
+                app:layout_constraintBottom_toTopOf="@+id/todayDeathsTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </RelativeLayout>
     </FrameLayout>
