@@ -1,4 +1,4 @@
-package com.example.coronatracker.all_countries.adapter
+package com.example.coronatracker.subscribed_countries
 
 import android.graphics.drawable.Icon
 import android.os.Build
@@ -9,37 +9,42 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.coronatracker.Constant
 import com.example.coronatracker.R
+import com.example.coronatracker.all_countries.adapter.CountryAdapter
 import com.example.coronatracker.data_layer.model.Country
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.country_card.view.*
 
-class CountryAdapter(inputList :List<Country>) : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() {
+class SubscribedCountriesAdapter : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() {
 
-    var  list :List<Country>? = null
+    var list :List<Country>? = null
     lateinit var onSubscribeListener: (View, Country) -> Unit
-    init {
-        list = inputList
-    }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryViewHolder {
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryAdapter.CountryViewHolder {
 
         val itemView: View = LayoutInflater.from(parent.context)
             .inflate(R.layout.country_card, parent, false)
-        return CountryViewHolder(itemView)
+        val countryViewHolder = CountryAdapter.CountryViewHolder(itemView)
+        var icon :Icon = Icon.createWithResource(parent.context ,R.drawable.ic_star_colord)
+        countryViewHolder.addIcon?.setImageIcon(icon)
+        countryViewHolder.addIcon?.setOnClickListener {view ->
+            onSubscribeListener(view, list!![countryViewHolder.adapterPosition])
+        }
+        return countryViewHolder
     }
 
     override fun getItemCount(): Int {
-        return list!!.size
+        return list?.size ?: 0
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
-    override fun onBindViewHolder(holder: CountryViewHolder, position: Int) {
-       var currentCountry: Country = list!!.get(position)
+    override fun onBindViewHolder(holder: CountryAdapter.CountryViewHolder, position: Int) {
+        var currentCountry: Country = list!!.get(position)
         holder.countryName!!.text = currentCountry.country
         holder.cases!!.text = "Cases : "+ currentCountry.cases.toString()
         holder.todayCases!!.text = "Today cases : "+ currentCountry.todayCases.toString()
@@ -53,7 +58,7 @@ class CountryAdapter(inputList :List<Country>) : RecyclerView.Adapter<CountryAda
             .into(holder.countryImage);
         holder.itemView.setOnClickListener {
             val bundle = Bundle()
-           // val personJsonString: String = GsonUtils.getGsonParser()!!.toJson(currentCountry)
+            // val personJsonString: String = GsonUtils.getGsonParser()!!.toJson(currentCountry)
             bundle.putString(Constant.COUNTRY_NAME, currentCountry.country)
             bundle.putLong(Constant.CASES, currentCountry.cases)
             bundle.putLong(Constant.TODAY_CASES, currentCountry.todayCases)
@@ -64,29 +69,27 @@ class CountryAdapter(inputList :List<Country>) : RecyclerView.Adapter<CountryAda
             Navigation.findNavController(it)
                 .navigate(R.id.action_allCountriesFragment_to_countryStatisticFragment, bundle)
         }
-        holder.addIcon?.setOnClickListener {
-            Toast.makeText(it?.getContext(), "ITEM PRESSED = " + currentCountry.country, Toast.LENGTH_SHORT).show();
-            var icon :Icon = Icon.createWithResource(it.context ,R.drawable.ic_star_colord)
-            holder.addIcon?.setImageIcon(icon)
-            // write code to add currentCountry to room here
-            onSubscribeListener(it, list!![position])
-        }
     }
 
-    fun setOnSubscribeClickListener(onSubscribeListener: (View, Country) -> Unit) {
+    fun setSubscribedCountries(list: List<Country>) {
+        this.list = list
+        notifyDataSetChanged()
+    }
+
+    fun setOnDeleteClickListener(onSubscribeListener: (View, Country) -> Unit) {
         this.onSubscribeListener = onSubscribeListener
     }
 
     class CountryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)  {
-        var countryImage :ImageView? = null
-        var countryName :TextView? = null
-        var cases :TextView? = null
-        var todayCases :TextView? = null
-        var deaths :TextView? = null
-        var todayDeaths :TextView? = null
-        var active :TextView? = null
-        var recoverd :TextView? = null
-        var addIcon :ImageButton? = null
+        var countryImage : ImageView? = null
+        var countryName : TextView? = null
+        var cases : TextView? = null
+        var todayCases : TextView? = null
+        var deaths : TextView? = null
+        var todayDeaths : TextView? = null
+        var active : TextView? = null
+        var recoverd : TextView? = null
+        var addIcon : ImageButton? = null
         init {
             countryImage = itemView.country_image
             countryName = itemView.countryName
@@ -101,9 +104,4 @@ class CountryAdapter(inputList :List<Country>) : RecyclerView.Adapter<CountryAda
 
 
     }
-
-    interface OnSubscribeClickListener {
-        fun onClick(view: View, country: Country)
-    }
-
 }

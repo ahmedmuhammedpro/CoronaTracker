@@ -1,6 +1,7 @@
 package com.example.coronatracker.data_layer
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.coronatracker.data_layer.local.CountryDatabase
 import com.example.coronatracker.data_layer.local.CountryInfoDatabase
@@ -22,6 +23,7 @@ public class LocalRepositoryImp(application: Application) : LocalRepository {
     // Country functions
     override fun insertCountries(vararg country: Country) {
         CoroutineScope(Dispatchers.IO).launch {
+            Log.i("ahmed", "inserted ${country[0].country}")
             countryDao.insert(*country)
         }
     }

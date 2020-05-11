@@ -26,22 +26,22 @@ class AllCountriesFragment : Fragment() {
         LocalRepositoryImp(activity?.application!!)
     }
     private var myJob: Job? = null
-    var  list :List<Country>? = null
-    var countryAdapter : CountryAdapter? = null
-    var recyclerView : RecyclerView? = null
-    var swipeRefreshLayout : SwipeRefreshLayout? = null
+    var list: List<Country>? = null
+    var countryAdapter: CountryAdapter? = null
+    var recyclerView: RecyclerView? = null
+    var swipeRefreshLayout: SwipeRefreshLayout? = null
     private lateinit var viewModel: AllCountriesViewModel
-    var cases :TextView? = null
-    var today :TextView? = null
-    var active :TextView? = null
-    var ciritcal :TextView? = null
-    var world :World? = null
-    var progressBar :ProgressBar?= null
+    var cases: TextView? = null
+    var today: TextView? = null
+    var active: TextView? = null
+    var ciritcal: TextView? = null
+    var world: World? = null
+    var progressBar: ProgressBar? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var view : View = inflater.inflate(R.layout.all_countries_fragment, container, false)
+        var view: View = inflater.inflate(R.layout.all_countries_fragment, container, false)
         recyclerView = view.recyclerView
         cases = view.allWorldCases
         today = view.allWorldToday
@@ -50,7 +50,7 @@ class AllCountriesFragment : Fragment() {
         progressBar = view.progressBar
         swipeRefreshLayout = view.swipeContainer
         swipeRefreshLayout!!.setOnRefreshListener {
-        setUI()
+            setUI()
             swipeRefreshLayout!!.isRefreshing = false
             Toast.makeText(context, "Refresh", Toast.LENGTH_SHORT).show();
         }
@@ -61,29 +61,34 @@ class AllCountriesFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(AllCountriesViewModel::class.java)
-       setUI()
+        setUI()
 
 
     }
-fun setUI()
-{
-    myJob = CoroutineScope(Dispatchers.IO).launch {
-        list  = viewModel.getAllCountriesDataList()
-        world = viewModel.getWorldData()
-        withContext(Dispatchers.Main) {
-            countryAdapter = CountryAdapter(list!!)
 
-            val mLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context)
-            recyclerView!!.setLayoutManager(mLayoutManager)
-            recyclerView!!.setAdapter(countryAdapter)
-            cases?.text = world!!.cases.toString()
-            today?.text = world!!.todayCases.toString()
-            active?.text = world!!.active.toString()
-            ciritcal?.text = world!!.critical.toString()
-            progressBar?.visibility = View.INVISIBLE
+    fun setUI() {
+        myJob = CoroutineScope(Dispatchers.IO).launch {
+            list = viewModel.getAllCountriesDataList()
+            world = viewModel.getWorldData()
+            withContext(Dispatchers.Main) {
+                countryAdapter = CountryAdapter(list!!)
+                countryAdapter?.setOnSubscribeClickListener(this@AllCountriesFragment::subscribe)
+
+                val mLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context)
+                recyclerView!!.setLayoutManager(mLayoutManager)
+                recyclerView!!.setAdapter(countryAdapter)
+                cases?.text = world!!.cases.toString()
+                today?.text = world!!.todayCases.toString()
+                active?.text = world!!.active.toString()
+                ciritcal?.text = world!!.critical.toString()
+                progressBar?.visibility = View.INVISIBLE
 
 
+            }
         }
     }
-}
+
+    private fun subscribe(view: View, country: Country) {
+        localRepo.insertCountries(country)
+    }
 }
