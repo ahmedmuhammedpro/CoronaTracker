@@ -1,5 +1,6 @@
 package com.example.coronatracker.data_layer.model
 import androidx.annotation.NonNull
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
@@ -17,6 +18,7 @@ data class Country (
     val country: String,
     @SerializedName("countryInfo")
     @Expose
+    @Embedded
     val countryInfo: CountryInfo,
     @SerializedName("cases")
     @Expose
@@ -63,20 +65,22 @@ data class CountryInfo (
     @Expose
     @PrimaryKey
     @NonNull
-    val id: Long,
+    var id: Long,
     @SerializedName("iso2")
     @Expose
-    val iso2: String,
+    var iso2: String,
     @SerializedName("iso3")
     @Expose
-    val iso3: String,
+    var iso3: String,
     @SerializedName("lat")
     @Expose
-    val lat: Double,
+    var lat: Double,
     @SerializedName("long")
     @Expose
-    val long: Double,
+    var long: Double,
     @SerializedName("flag")
     @Expose
-    val flag: String
-)
+    var flag: String
+) {
+    constructor() :this(0, "", "", 0.0, 0.0, "") {}
+}

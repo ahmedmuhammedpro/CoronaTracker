@@ -1,7 +1,6 @@
 package com.example.coronatracker.all_countries
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,12 +14,17 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.coronatracker.R
 import com.example.coronatracker.all_countries.adapter.CountryAdapter
+import com.example.coronatracker.data_layer.LocalRepository
+import com.example.coronatracker.data_layer.LocalRepositoryImp
 import com.example.coronatracker.data_layer.model.Country
 import com.example.coronatracker.data_layer.model.World
 import kotlinx.android.synthetic.main.all_countries_fragment.view.*
 import kotlinx.coroutines.*
 
 class AllCountriesFragment : Fragment() {
+    val localRepo: LocalRepository by lazy {
+        LocalRepositoryImp(activity?.application!!)
+    }
     private var myJob: Job? = null
     var  list :List<Country>? = null
     var countryAdapter : CountryAdapter? = null

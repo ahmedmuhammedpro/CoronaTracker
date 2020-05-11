@@ -8,6 +8,9 @@ import com.example.coronatracker.data_layer.local.WorldEntityDatabase
 import com.example.coronatracker.data_layer.model.Country
 import com.example.coronatracker.data_layer.model.CountryInfo
 import com.example.coronatracker.data_layer.model.World
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.lang.UnsupportedOperationException
 
 public class LocalRepositoryImp(application: Application) : LocalRepository {
@@ -17,57 +20,69 @@ public class LocalRepositoryImp(application: Application) : LocalRepository {
     private val worldEntityDao = WorldEntityDatabase.getInstance(application).worldEntityDao()
 
     // Country functions
-    override suspend fun insertCountries(vararg country: Country) {
-        countryDao.insert(*country)
+    override fun insertCountries(vararg country: Country) {
+        CoroutineScope(Dispatchers.IO).launch {
+            countryDao.insert(*country)
+        }
     }
 
-    override suspend fun findCountryByName(name: String): Country {
+    override fun findCountryByName(name: String): Country {
         return countryDao.findByName(name)
     }
 
-    override suspend fun getAllCountries(): LiveData<List<Country>> {
+    override fun getAllCountries(): LiveData<List<Country>> {
         return countryDao.getAll()
     }
 
-    override suspend fun deleteCountries(vararg country: Country) {
-        countryDao.delete(*country)
+    override fun deleteCountries(vararg country: Country) {
+        CoroutineScope(Dispatchers.IO).launch {
+            countryDao.delete(*country)
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////////
 
     // Country Info functions
-    override suspend fun insertCountryInfo(vararg countryInfo: CountryInfo) {
-        countryInfoDao.insert(*countryInfo)
+    override fun insertCountryInfo(vararg countryInfo: CountryInfo) {
+        CoroutineScope(Dispatchers.IO).launch {
+            countryInfoDao.insert(*countryInfo)
+        }
     }
 
-    override suspend fun findCountryInfoById(id: Int): CountryInfo {
+    override fun findCountryInfoById(id: Int): CountryInfo {
         return countryInfoDao.findById(id)
     }
 
-    override suspend fun getAllCountriesInfo(): LiveData<List<CountryInfo>> {
+    override fun getAllCountriesInfo(): LiveData<List<CountryInfo>> {
         return countryInfoDao.getAll()
     }
 
-    override suspend fun deleteCountriesInfo(vararg countryInfo: CountryInfo) {
-        countryInfoDao.delete(*countryInfo)
+    override fun deleteCountriesInfo(vararg countryInfo: CountryInfo) {
+        CoroutineScope(Dispatchers.IO).launch {
+            countryInfoDao.delete(*countryInfo)
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////
 
     // World Entity functions
-    override suspend fun insertWorldEntities(vararg world: World) {
-        worldEntityDao.insert(*world)
+    override fun insertWorldEntities(vararg world: World) {
+        CoroutineScope(Dispatchers.IO).launch {
+            worldEntityDao.insert(*world)
+        }
     }
 
-    override suspend fun findWorldEntityById(id: Int): World {
+    override fun findWorldEntityById(id: Int): World {
         return findWorldEntityById(id)
     }
 
-    override suspend fun getAllWorldEntities(): LiveData<List<World>> {
+    override fun getAllWorldEntities(): LiveData<List<World>> {
         throw UnsupportedOperationException()
     }
 
-    override suspend fun deleteWorldEntities(vararg world: World) {
-        worldEntityDao.delete(*world)
+    override fun deleteWorldEntities(vararg world: World) {
+        CoroutineScope(Dispatchers.IO).launch {
+            worldEntityDao.delete(*world)
+        }
     }
 }
