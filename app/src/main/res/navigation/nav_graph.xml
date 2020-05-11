@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/allCountriesFragment">
+    <!--sara-->
+    <!--sara-->
+    <!--ahmed-->
+    <!--ahmed-->
+    <fragment
+        android:id="@+id/allCountriesFragment"
+        android:name="com.example.coronatracker.all_countries.AllCountriesFragment"
+        android:label="all_countries_fragment"
+        tools:layout="@layout/all_countries_fragment" >
+        <action
+            android:id="@+id/action_allCountriesFragment_to_countryStatisticFragment"
+            app:destination="@id/countryStatisticFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/subscribedCountriesFragment"
+        android:name="com.example.coronatracker.subscribed_countries.SubscribedCountriesFragment"
+        android:label="subscribed_countries_fragment"
+        tools:layout="@layout/subscribed_countries_fragment" />
+    <fragment
+        android:id="@+id/countryStatisticFragment"
+        android:name="com.example.coronatracker.country_statistics.CountryStatisticFragment"
+        android:label="country_statistic_fragment"
+        tools:layout="@layout/country_statistic_fragment" />
+</navigation>
