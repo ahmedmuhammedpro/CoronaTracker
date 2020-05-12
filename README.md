@@ -1,5 +1,5 @@
 # CoronaTracker #
-###Android Sdk version###
+#Android Sdk version#
 *min  19
 *max 29
 #Team member#
