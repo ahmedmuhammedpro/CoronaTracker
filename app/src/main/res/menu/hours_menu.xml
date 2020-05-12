@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item  android:id="@+id/one_hour"
+        android:title="One hour"/>
+    <item  android:id="@+id/two_hour"
+        android:title="Two hours"/>
+    <item  android:id="@+id/three_hours"
+        android:title="Three hours"
+        />
+    <item  android:id="@+id/one_day"
+        android:title="One Day(24 hours)"
+        app:showAsAction="withText"/>
+</menu>

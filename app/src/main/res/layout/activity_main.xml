@@ -8,6 +8,7 @@
     android:weightSum="5"
     android:background="#ffffff"
     tools:context=".MainActivity">
+
 <RelativeLayout
     android:layout_width="match_parent"
     android:id="@+id/linearLayout"
@@ -52,6 +53,16 @@
 
 
     </LinearLayout>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+        android:id="@+id/menuItembtn"
+        android:src="@drawable/ic_more_vert_black_24dp">
+
+    </ImageButton>
 </RelativeLayout>
     <fragment
         android:id="@+id/nav_host_fragment"
