@@ -62,8 +62,6 @@ class AllCountriesFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(AllCountriesViewModel::class.java)
         setUI()
-
-
     }
 
     fun setUI() {
