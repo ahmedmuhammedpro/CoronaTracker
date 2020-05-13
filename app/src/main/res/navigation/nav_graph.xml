@@ -21,7 +21,11 @@
         android:id="@+id/subscribedCountriesFragment"
         android:name="com.example.coronatracker.subscribed_countries.SubscribedCountriesFragment"
         android:label="subscribed_countries_fragment"
-        tools:layout="@layout/subscribed_countries_fragment" />
+        tools:layout="@layout/subscribed_countries_fragment" >
+        <action
+            android:id="@+id/action_subscribedCountriesFragment_to_countryStatisticFragment"
+            app:destination="@id/countryStatisticFragment" />
+    </fragment>
     <fragment
         android:id="@+id/countryStatisticFragment"
         android:name="com.example.coronatracker.country_statistics.CountryStatisticFragment"

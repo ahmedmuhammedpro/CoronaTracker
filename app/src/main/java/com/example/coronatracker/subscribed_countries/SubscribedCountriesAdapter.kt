@@ -67,7 +67,7 @@ class SubscribedCountriesAdapter : RecyclerView.Adapter<CountryAdapter.CountryVi
             bundle.putLong(Constant.ACTIVE, currentCountry.active)
             bundle.putLong(Constant.RECIVERD, currentCountry.recovered)
             Navigation.findNavController(it)
-                .navigate(R.id.action_allCountriesFragment_to_countryStatisticFragment, bundle)
+                .navigate(R.id.action_subscribedCountriesFragment_to_countryStatisticFragment, bundle)
         }
     }
 
