@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
     companion object {
         const val SHARED_PREFERENCE = "coronaSharedPreferences"
     }
+    var workManager :WorkerViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,12 +40,12 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
         }
         /*sara*/
         /*ahemd*/
+        workManager = WorkerViewModel(this)
         /*ahmed*/
 
         if (!isWorkManagerRunning()) {
             Log.i("ahmed", "not running")
-            val workManager = WorkerViewModel(this)
-            workManager.requestNewData(2, TimeUnit.HOURS)
+            workManager?.requestNewData(2, TimeUnit.HOURS)
 
             val editor = getSharedPreferences(SHARED_PREFERENCE, Context.MODE_PRIVATE).edit()
             editor.putBoolean("workManager", true)
@@ -84,18 +85,25 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
         return when (id) {
             R.id.one_hour -> {
                 Toast.makeText(applicationContext, "one_hour", Toast.LENGTH_LONG).show()
+                workManager?.requestNewData(1, TimeUnit.HOURS)
+
                 true
             }
             R.id.two_hour -> {
                 Toast.makeText(applicationContext, "two_hours", Toast.LENGTH_LONG).show()
+                workManager?.requestNewData(2, TimeUnit.HOURS)
                 true
             }
             R.id.three_hours -> {
                 Toast.makeText(applicationContext, "three_hours", Toast.LENGTH_LONG).show()
+                workManager?.requestNewData(3, TimeUnit.HOURS)
+
                 true
             }
             R.id.one_day -> {
                 Toast.makeText(applicationContext, "one_day", Toast.LENGTH_LONG).show()
+                workManager?.requestNewData(1, TimeUnit.DAYS)
+
                 true
             }
             else -> super.onOptionsItemSelected(item)
