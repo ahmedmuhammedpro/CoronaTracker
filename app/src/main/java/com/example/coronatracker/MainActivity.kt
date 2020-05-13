@@ -1,29 +1,21 @@
 package com.example.coronatracker
 
-<<<<<<< HEAD
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-=======
-import android.os.Bundle
 import android.view.MenuInflater
 import android.view.MenuItem
->>>>>>> bb7bfd896f3592a326a42c9b0b28a3cbaeaab1f8
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.coronatracker.workmanager.WorkerViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
-<<<<<<< HEAD
 import java.util.concurrent.TimeUnit
-=======
 import java.nio.file.Files.delete
->>>>>>> bb7bfd896f3592a326a42c9b0b28a3cbaeaab1f8
 
 
 class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
@@ -82,13 +74,10 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
 
 }
 
-<<<<<<< HEAD
     private fun isWorkManagerRunning(): Boolean {
         val preferences = getSharedPreferences(SHARED_PREFERENCE, Context.MODE_PRIVATE)
         return preferences.getBoolean("workManager", false)
     }
-
-=======
 
     override fun onMenuItemClick(item: MenuItem): Boolean {
         val id: Int = item.getItemId()
@@ -114,8 +103,6 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
 
     }
 
-
->>>>>>> bb7bfd896f3592a326a42c9b0b28a3cbaeaab1f8
     /*sara*/
     /*ahmed*/
     /*ahmed*/
