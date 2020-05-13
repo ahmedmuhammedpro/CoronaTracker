@@ -8,6 +8,7 @@ interface RepositoryInterface {
 
       suspend fun  getAllData(): List<Country>
       suspend fun  getWorldData(): World
+      suspend fun getCountriesData(names: String): List<Country>
       /*sara*/
       /*ahmed*/
       /*ahmed*/

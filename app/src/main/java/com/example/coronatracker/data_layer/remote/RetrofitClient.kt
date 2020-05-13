@@ -7,7 +7,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class RetrofitClient private constructor(){
+class RetrofitClient private constructor() {
     companion object {
         fun getInstance(okHttpClient: OkHttpClient): RetrofitClient {
             if (INSTANCE == null) {
@@ -27,27 +27,40 @@ class RetrofitClient private constructor(){
         private var counrtyApi: CounrtyApi? = null
         private var INSTANCE: RetrofitClient? = null
     }
+
     fun getCountryApi(): CounrtyApi? {
         return counrtyApi
     }
-/*sara*/
-     suspend fun getAllData(): List<Country> {
-         var list : List<Country>? = null
+
+    /*sara*/
+    suspend fun getAllData(): List<Country> {
+        var list: List<Country>? = null
         val result = counrtyApi?.getAllCountryData()?.await()
-         if (result != null)
-         {   list = result.map { it }
-         }
-         return list!!
-         }
+        if (result != null) {
+            list = result.map { it }
+        }
+        return list!!
+    }
+
     suspend fun getWorldData(): World {
-        var data : World? = null
+        var data: World? = null
         val result = counrtyApi?.getWorldData()?.await()
-        if (result != null)
-        {   data = result
+        if (result != null) {
+            data = result
         }
         return data!!
     }
     /*sara*/
     /*ahmed*/
-    /*ahmed*/
+
+    suspend fun getCountriesData(names: String): List<Country> {
+        var list: List<Country>? = null
+        val result = counrtyApi?.getCountriesData(names)?.await()
+        if (result != null) {
+            list = result.map { it }
+        }
+
+        return list!!
     }
+    /*ahmed*/
+}

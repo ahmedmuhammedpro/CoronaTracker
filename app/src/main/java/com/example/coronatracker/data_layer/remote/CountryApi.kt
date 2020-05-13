@@ -5,6 +5,8 @@ import com.example.coronatracker.data_layer.model.Country
 import com.example.coronatracker.data_layer.model.World
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface CounrtyApi {
     /*sara*/
@@ -15,5 +17,8 @@ interface CounrtyApi {
     fun getWorldData(): Deferred<World>
     /*sara*/
     /*ahmed*/
+
+    @GET("/v2/countries/{names}")
+    fun getCountriesData(@Path("names") names: String): Deferred<List<Country>>
     /*ahmed*/
 }

@@ -1,6 +1,7 @@
 package com.example.coronatracker.data_layer.local
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -11,10 +12,11 @@ public abstract class CountryDatabase : RoomDatabase() {
 
     companion object {
         private var INSTANCE: CountryDatabase? = null
+        private var co: Context? = null
 
-        fun getInstance(application: Application): CountryDatabase {
+        fun getInstance(context: Context): CountryDatabase {
             if (INSTANCE == null) {
-                INSTANCE = Room.databaseBuilder(application, CountryDatabase::class.java,
+                INSTANCE = Room.databaseBuilder(context, CountryDatabase::class.java,
                     "country_database")
                     .build()
             }

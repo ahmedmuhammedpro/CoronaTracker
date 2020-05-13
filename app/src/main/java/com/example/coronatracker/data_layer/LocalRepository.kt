@@ -11,6 +11,7 @@ interface LocalRepository {
     fun insertCountries(vararg country: Country)
     fun findCountryByName(name: String): Country
     fun getAllCountries(): LiveData<List<Country>>
+    fun getAllCountriesWithoutLiveData(): List<Country>
     fun deleteCountries(vararg country: Country)
 
     // Country Info

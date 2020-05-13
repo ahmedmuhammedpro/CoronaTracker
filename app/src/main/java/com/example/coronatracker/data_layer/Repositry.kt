@@ -19,8 +19,10 @@ class Repositry :RepositoryInterface{
     override suspend fun getWorldData(): World {
         return retrofitClient?.getWorldData()!!
     }
-     /*sara*/
-    /*ahmed*/
+
+    override suspend fun getCountriesData(names: String): List<Country> {
+        return retrofitClient?.getCountriesData(names)!!
+    }
     /*ahmed*/
 
 }

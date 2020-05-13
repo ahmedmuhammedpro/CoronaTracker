@@ -1,15 +1,22 @@
 package com.example.coronatracker
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.example.coronatracker.workmanager.WorkerViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
     var navHostFragment: NavHostFragment? = null
+    companion object {
+        const val SHARED_PREFERENCE = "coronaSharedPreferences"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,6 +26,16 @@ class MainActivity : AppCompatActivity() {
         /*sara*/
         /*ahemd*/
         /*ahmed*/
+
+        if (!isWorkManagerRunning()) {
+            Log.i("ahmed", "not running")
+            val workManager = WorkerViewModel(this)
+            workManager.requestNewData(2, TimeUnit.HOURS)
+
+            val editor = getSharedPreferences(SHARED_PREFERENCE, Context.MODE_PRIVATE).edit()
+            editor.putBoolean("workManager", true)
+            editor.apply()
+        }
     }
     /*sara*/
     fun  setupNavigation()
@@ -42,6 +59,11 @@ class MainActivity : AppCompatActivity() {
         }
 
 }
+
+    private fun isWorkManagerRunning(): Boolean {
+        val preferences = getSharedPreferences(SHARED_PREFERENCE, Context.MODE_PRIVATE)
+        return preferences.getBoolean("workManager", false)
+    }
 
     /*sara*/
     /*ahmed*/

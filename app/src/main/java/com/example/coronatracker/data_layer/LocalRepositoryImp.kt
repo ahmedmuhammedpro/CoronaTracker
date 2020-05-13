@@ -1,6 +1,7 @@
 package com.example.coronatracker.data_layer
 
 import android.app.Application
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.coronatracker.data_layer.local.CountryDatabase
@@ -14,16 +15,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.UnsupportedOperationException
 
-public class LocalRepositoryImp(application: Application) : LocalRepository {
+public class LocalRepositoryImp(context: Context) : LocalRepository {
 
-    private val countryDao = CountryDatabase.getInstance(application).countryDao()
-    private val countryInfoDao = CountryInfoDatabase.getInstance(application).countryInfoDao()
-    private val worldEntityDao = WorldEntityDatabase.getInstance(application).worldEntityDao()
+    private val countryDao = CountryDatabase.getInstance(context).countryDao()
+    private val countryInfoDao = CountryInfoDatabase.getInstance(context).countryInfoDao()
+    private val worldEntityDao = WorldEntityDatabase.getInstance(context).worldEntityDao()
 
     // Country functions
     override fun insertCountries(vararg country: Country) {
         CoroutineScope(Dispatchers.IO).launch {
-            Log.i("ahmed", "inserted ${country[0].country}")
             countryDao.insert(*country)
         }
     }
@@ -34,6 +34,10 @@ public class LocalRepositoryImp(application: Application) : LocalRepository {
 
     override fun getAllCountries(): LiveData<List<Country>> {
         return countryDao.getAll()
+    }
+
+    override fun getAllCountriesWithoutLiveData(): List<Country> {
+        return countryDao.getAllWithoutLiveData()
     }
 
     override fun deleteCountries(vararg country: Country) {

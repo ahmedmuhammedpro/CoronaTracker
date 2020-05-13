@@ -16,6 +16,9 @@ public interface CountryDao {
     @Query("select * from country_table")
     fun getAll(): LiveData<List<Country>>
 
+    @Query("select * from country_table")
+    fun getAllWithoutLiveData(): List<Country>
+
     @Delete
     fun delete(vararg country: Country)
 }

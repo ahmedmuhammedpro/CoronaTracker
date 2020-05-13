@@ -40,7 +40,6 @@ class SubscribedCountriesFragment : Fragment() {
 
         val localRepo: LocalRepository = LocalRepositoryImp(activity?.application!!)
         localRepo.getAllCountries().observe(viewLifecycleOwner, Observer { countries ->
-            Log.i("ahmed", "size = ${countries.size}")
             val adapter = SubscribedCountriesAdapter()
             adapter.setSubscribedCountries(countries)
             adapter.setOnDeleteClickListener(this@SubscribedCountriesFragment::deleteCountry)

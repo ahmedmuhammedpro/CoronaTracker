@@ -22,7 +22,7 @@ data class Country (
     val countryInfo: CountryInfo,
     @SerializedName("cases")
     @Expose
-    val cases: Long,
+    var cases: Long,
     @SerializedName("todayCases")
     @Expose
     val todayCases: Long,
