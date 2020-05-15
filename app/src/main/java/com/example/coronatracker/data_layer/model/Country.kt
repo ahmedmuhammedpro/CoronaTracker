@@ -43,16 +43,16 @@ data class Country (
     val critical: Long,
     @SerializedName("casesPerOneMillion")
     @Expose
-    val casesPerOneMillion: Long,
+    val casesPerOneMillion: Double,
     @SerializedName("deathsPerOneMillion")
     @Expose
-    val deathsPerOneMillion: Long,
+    val deathsPerOneMillion: Double,
     @SerializedName("tests")
     @Expose
     val tests: Long,
     @SerializedName("testsPerOneMillion")
     @Expose
-    val testsPerOneMillion: Long,
+    val testsPerOneMillion: Double,
     @SerializedName("continent")
     @Expose
     val continent: String
