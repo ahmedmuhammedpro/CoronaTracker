@@ -3,14 +3,14 @@
     <item
         android:id="@+id/allCountriesFragment"
         android:icon="@drawable/ic_home"
-        android:title=""
+        android:title="Home"
         />
     <item
         android:id="@+id/subscribedCountriesFragment"
         android:icon="@drawable/ic_star"
         android:iconTint="#928D8D"
 
-        android:title=""
+        android:title="Subscribed Countries"
        />
 
 
