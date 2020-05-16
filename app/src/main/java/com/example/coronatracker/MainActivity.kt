@@ -41,11 +41,12 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
         /*sara*/
         /*ahemd*/
         workManager = WorkerViewModel(this)
+        workManager?.requestNewData(16, TimeUnit.MINUTES)
         /*ahmed*/
 
         if (!isWorkManagerRunning()) {
             Log.i("ahmed", "not running")
-            workManager?.requestNewData(2, TimeUnit.HOURS)
+
 
             val editor = getSharedPreferences(SHARED_PREFERENCE, Context.MODE_PRIVATE).edit()
             editor.putBoolean("workManager", true)

@@ -19,6 +19,7 @@ class WorkerHandler(val context: Context, workerParameters: WorkerParameters) :
 
     override fun doWork(): Result = runBlocking {
         val deferredLocal = async {
+            Log.i("ahmed", "WorkerHandler")
             val localRepo = LocalRepositoryImp(context)
             localCountries = localRepo.getAllCountriesWithoutLiveData()
             for (i in localCountries.indices) {
@@ -43,8 +44,13 @@ class WorkerHandler(val context: Context, workerParameters: WorkerParameters) :
         Result.success()
     }
 
-    fun showNotification(oldCountries: List<Country>, newCountries: List<Country>) {
+    private fun showNotification(oldCountries: List<Country>, newCountries: List<Country>) {
         val notification = CountryNotification(context)
+        var count: Long = 5
+        newCountries.forEach {
+            count += 5
+            it.cases = count
+        }
         for (i in oldCountries.indices) {
             if (!oldCountries[i].equals(newCountries[i])) {
                 notification.showNotification(newCountries[i])
