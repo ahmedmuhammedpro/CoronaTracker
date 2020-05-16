@@ -46,11 +46,12 @@ class WorkerHandler(val context: Context, workerParameters: WorkerParameters) :
 
     private fun showNotification(oldCountries: List<Country>, newCountries: List<Country>) {
         val notification = CountryNotification(context)
-        var count: Long = 5
-        newCountries.forEach {
-            count += 5
-            it.cases = count
-        }
+        // I change data for testing only
+//        var count: Long = 5
+//        newCountries.forEach {
+//            count += 5
+//            it.cases = count
+//        }
         for (i in oldCountries.indices) {
             if (!oldCountries[i].equals(newCountries[i])) {
                 notification.showNotification(newCountries[i])

@@ -3,7 +3,6 @@ package com.example.coronatracker
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
@@ -15,7 +14,6 @@ import com.example.coronatracker.workmanager.WorkerViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.concurrent.TimeUnit
-import java.nio.file.Files.delete
 
 
 class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
@@ -23,7 +21,7 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
     companion object {
         const val SHARED_PREFERENCE = "coronaSharedPreferences"
     }
-    var workManager :WorkerViewModel? = null
+    private var workManager = WorkerViewModel(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,19 +38,23 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
         }
         /*sara*/
         /*ahemd*/
-        workManager = WorkerViewModel(this)
-        workManager?.requestNewData(16, TimeUnit.MINUTES)
         /*ahmed*/
 
         if (!isWorkManagerRunning()) {
-            Log.i("ahmed", "not running")
-
-
+            workManager.requestNewData(1, TimeUnit.HOURS)
             val editor = getSharedPreferences(SHARED_PREFERENCE, Context.MODE_PRIVATE).edit()
             editor.putBoolean("workManager", true)
             editor.apply()
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        val editor = getSharedPreferences(SHARED_PREFERENCE, Context.MODE_PRIVATE).edit()
+        editor.putBoolean("workManager", false)
+        editor.apply()
+    }
+
     /*sara*/
     fun  setupNavigation()
     {
@@ -86,18 +88,18 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
         return when (id) {
             R.id.one_hour -> {
                 Toast.makeText(applicationContext, "one_hour", Toast.LENGTH_LONG).show()
-                workManager?.requestNewData(1, TimeUnit.HOURS)
+                workManager.requestNewData(1, TimeUnit.HOURS)
 
                 true
             }
             R.id.two_hour -> {
                 Toast.makeText(applicationContext, "two_hours", Toast.LENGTH_LONG).show()
-                workManager?.requestNewData(2, TimeUnit.HOURS)
+                workManager.requestNewData(2, TimeUnit.HOURS)
                 true
             }
             R.id.three_hours -> {
                 Toast.makeText(applicationContext, "three_hours", Toast.LENGTH_LONG).show()
-                workManager?.requestNewData(3, TimeUnit.HOURS)
+                workManager.requestNewData(3, TimeUnit.HOURS)
 
                 true
             }
