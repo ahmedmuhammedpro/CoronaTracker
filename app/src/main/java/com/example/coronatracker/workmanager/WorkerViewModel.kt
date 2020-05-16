@@ -15,6 +15,7 @@ class WorkerViewModel(val context: Context) {
         val request = PeriodicWorkRequest
             .Builder(WorkerHandler::class.java, number, unit)
             .build()
+
         Log.i("ahmed", "WorkerViewModel")
         workerManager.enqueueUniquePeriodicWork("coronaWorker",
             ExistingPeriodicWorkPolicy.REPLACE, request)
